@@ -20,6 +20,7 @@ class Task(DB.Model):
     description = DB.Column(DB.String(255), nullable=True)
     date = DB.Column(DB.Date, nullable=False)
     done = DB.Column(DB.Boolean, default=False)
+    user_id = DB.Column(DB.Integer, DB.ForeignKey('user.id'))
 
     def __init__(self, task: dict):
         self.name = task.get('name')
@@ -69,4 +70,18 @@ class User(DB.Model):
             return 'Signature expired. Please log in again.'
         except jwt.InvalidTokenError:
             return 'Invalid token. Please log in again.'
+    
+    @staticmethod
+    def get_auth_token(request):
+        auth_header = request.headers.get('Authorization')
+        auth_token = auth_header.split()[1] if auth_header else ''
+        return auth_token
 
+    @staticmethod
+    def get_user_status(auth_token):
+        user = None
+        if auth_token:
+            resp = User.decode_auth_token(auth_token)
+            if not isinstance(resp, str):
+                user = User.query.filter_by(id=resp).first()
+        return user

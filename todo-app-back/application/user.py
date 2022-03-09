@@ -52,19 +52,16 @@ def login():
 
 @bp_user.route('/auth/status', methods=['GET'])
 def status():
-    auth_header = request.headers.get('Authorization')
-    auth_token = auth_header.split()[1] if auth_header else ''
-    if auth_token:
-        resp = User.decode_auth_token(auth_token)
-        if not isinstance(resp, str):
-            user = User.query.filter_by(id=resp).first()
-            response = {
-                'status': 'success',
-                'data': {
-                    'id': user.id,
-                    'name': user.name
-                }
+    auth_token = User.get_auth_token(request)
+    user = User.get_user_status(auth_token)
+    if user:
+        response = {
+            'status': 'success',
+            'data': {
+                'id': user.id,
+                'name': user.name
             }
-            return jsonify(response), 200
+        }
+        return jsonify(response), 200
     response = {'status': 'fail', 'message': 'Provide a valid auth token.'}
     return jsonify(response), 401
