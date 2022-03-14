@@ -28,7 +28,7 @@ def register():
         response = {
             'status': 'success',
             'message': 'Successfully registered',
-            'token': auth_token.decode()
+            'auth_token': auth_token.decode()
         }
         return jsonify(response), 201
 
@@ -37,7 +37,8 @@ def register():
 def login():
     login_request = request.json
     user = User.query.filter_by(email=login_request.get('email')).first()
-    if user and check_password_hash(user.password, login_request.get('password')):
+    password_ok = check_password_hash(user.password, login_request.get('password')) 
+    if user and password_ok:
         auth_token = User.encode_auth_token(user.id)
         if auth_token:
             response = {
