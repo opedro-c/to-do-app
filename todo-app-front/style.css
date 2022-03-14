@@ -6,6 +6,8 @@
     --hover-color: #6c8094;
     --shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     --color-border: #94a0ac;
+    --max-width: 650px;
+    --invert-main-collor: #8f7f6f;
 }
 
 * {
@@ -31,7 +33,7 @@ h1 {
 
 .wrapper {
     background: white;
-    width: 650px;
+    width: var(--max-width);
     padding: 28px 0;
     margin: auto;
 }
@@ -86,6 +88,7 @@ h1 {
 
 .filters {
     display: flex;
+    color: var(--main-color);
 }
 .filters span {
     cursor: pointer;
@@ -97,13 +100,8 @@ h1 {
     margin-left: 0;
 }
 .filters span.active {
-    color: var(--main-color);
-}
-.filters span.active::before {
-    content: "> ";
-}
-.filters span.active::after {
-    content: " <";
+    color: var(--invert-main-collor);
+    border-bottom: 1px solid var(--invert-main-collor);
 }
 
 .task-box {
@@ -176,7 +174,7 @@ footer {
     text-align: center;
     margin: 20px auto 0;
     color: white;
-    width: 90%;
+    width: var(--max-width);
     display: flex;
     justify-content: space-between;
 }
@@ -185,7 +183,7 @@ footer a {
 }
 
 @media screen and (max-width: 600px) {
-    .wrapper {
+    .wrapper, footer {
         width: 90%;
     }
     .filters {
