@@ -78,7 +78,7 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response.json.get('name'), request_json['name'])
         response = self.client.get('/task', headers=request_headers)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(any([request_json['name'] == task['name'] for task in self.config['tasks']]))
+        self.assertTrue(list(filter(lambda x: x['name'] == request_json['name'], response.json)))
 
 
 if __name__ == '__main__':
