@@ -59,10 +59,17 @@ def delete(task_id):
 
 
 @bp_tasks.route('/task/<task_id>', methods=['PUT'])
-@login_required
 def update(task_id):
+    user = get_request_user(request)
+    if not user: return jsonify(False), 401
     ts = TaskSchema()
     query = Task.query.filter(Task.id == task_id)
+    if not query.first():
+        response = {
+            'status': 'fail',
+            'message': 'Task not found'
+        }
+        return jsonify(response), 400
     query.update(request.json)
     current_app.db.session.commit()
     return ts.jsonify(query.first())

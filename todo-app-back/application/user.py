@@ -37,8 +37,7 @@ def register():
 def login():
     login_request = request.json
     user = User.query.filter_by(email=login_request.get('email')).first()
-    password_ok = check_password_hash(user.password, login_request.get('password')) 
-    if user and password_ok:
+    if user and check_password_hash(user.password, login_request.get('password')):
         auth_token = User.encode_auth_token(user.id)
         if auth_token:
             response = {
