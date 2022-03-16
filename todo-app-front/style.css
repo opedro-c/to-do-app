@@ -1,8 +1,8 @@
 @import url('http://fonts.googleapis.com/css?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    /* --main-color: #939; */
     --main-color: slategray;
+    --second-color: #9bc3ff;
     --hover-color: #6c8094;
     --shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     --color-border: #94a0ac;
@@ -31,11 +31,33 @@ h1 {
     margin: 0 auto 20px;
 }
 
+.links {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: var(--max-width);
+}
+.links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+.links a:hover {
+    color: var(--second-color);
+}
+
 .wrapper {
     background: white;
     width: var(--max-width);
     padding: 28px 0;
     margin: auto;
+}
+.info {
+    display: flex;
+    flex-direction: column;
 }
 
 .task-input {
@@ -125,6 +147,9 @@ h1 {
 .task label p::first-letter {
     text-transform: uppercase;
 }
+.task label p {
+    padding-right: 20px;
+}
 .task label p.checked {
     text-decoration: line-through;
 }
@@ -182,8 +207,8 @@ footer a {
     color: inherit;
 }
 
-@media screen and (max-width: 600px) {
-    .wrapper, footer {
+@media screen and (max-width: 768px) {
+    .wrapper, .links, footer {
         width: 90%;
     }
     .filters {
