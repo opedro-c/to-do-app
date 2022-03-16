@@ -51,8 +51,16 @@ def create():
 
 
 @bp_tasks.route('/task/<task_id>', methods=['DELETE'])
-@login_required
 def delete(task_id):
+    user = get_request_user(request)
+    query = Task.query.filter(Task.id == task_id)
+    if not user: return jsonify(False), 401
+    if not query.first():
+        response = {
+            'status': 'fail',
+            'message': 'Task not found'
+        }
+        return jsonify(response), 400
     Task.query.filter(Task.id == task_id).delete()
     current_app.db.session.commit()
     return jsonify(True), 200

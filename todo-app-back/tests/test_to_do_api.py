@@ -102,10 +102,25 @@ class TestAPI(unittest.TestCase):
     def test_update_task_info_wrong_id(self):
         token = self.log_user_in().json['auth_token']
         request_headers = {'Authorization': f'Bearer {token}'}
-        response = self.client.get('/task', headers=request_headers)
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(response.json[0]['done'])
         response = self.client.put('/task/5', headers=request_headers, json={'done': True})
+        self.assertEqual(response.status_code, 400, response.json)
+
+    def test_delete_tasks(self):
+        token = self.log_user_in().json['auth_token']
+        request_headers = {'Authorization': f'Bearer {token}'}
+        response = self.client.get('/task', headers=request_headers)
+        self.assertTrue(response.json)
+        tasks_ids = [task['id'] for task in response.json]
+        for id in tasks_ids:
+            response = self.client.delete(f'/task/{id}', headers=request_headers)
+            self.assertEqual(response.status_code, 200)
+        response = self.client.get('/task', headers=request_headers)
+        self.assertFalse(response.json)
+
+    def test_delete_unexistent_task(self):
+        token = self.log_user_in().json['auth_token']
+        request_headers = {'Authorization': f'Bearer {token}'}
+        response = self.client.delete('/task/5', headers=request_headers)
         self.assertEqual(response.status_code, 400, response.json)
 
 
