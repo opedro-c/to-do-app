@@ -86,11 +86,12 @@ class User(DB.Model):
         return auth_token
 
     @staticmethod
-    def get_user_status(auth_token: str) -> Union['User', None]:
+    def get_user_status(request: Request) -> Union['User', None]:
         """
         Return User object if query is completed successfully,
         or None if user don't exists
         """
+        auth_token = User.get_auth_token(request)
         user: User = None
         if auth_token:
             resp: Union[int, str] = User.decode_auth_token(auth_token)

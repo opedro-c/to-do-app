@@ -123,6 +123,18 @@ class TestAPI(unittest.TestCase):
         response = self.client.delete('/task/5', headers=request_headers)
         self.assertEqual(response.status_code, 400, response.json)
 
+    def test_create_task_with_unauthorized_user(self):
+        request_json = self.config['tasks'][0]
+        response = self.client.post('/task', json=request_json)
+        self.assertEqual(response.status_code, 401, response.json)
+
+    def test_update_and_delete_task_with_unauthorized_user(self):
+        request_headers = {'Authorization': f'Bearer randomtokenhere'}
+        response = self.client.put('/task/1', headers=request_headers, json={'done': True})
+        self.assertEqual(response.status_code, 401, response.json)
+        response = self.client.delete(f'/task/1', headers=request_headers)
+        self.assertEqual(response.status_code, 401, response.json)
+
 
 if __name__ == '__main__':
     unittest.main()
