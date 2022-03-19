@@ -1,0 +1,15 @@
+# Output files
+__pycache__
+*.pyc
+
+# Virtual environments files
+todo-app-back/todo
+venv
+
+# Database files
+*.db
+migrations
+
+# IDE files
+.vscode/
+.idea/

@@ -1,0 +1,35 @@
+{
+    "user_register_json": {
+        "name": "Foo Bar",
+        "email": "foo@bar.com",
+        "password": "strongpassword"
+    },
+    "wrong_user": {
+        "email": "foo@bar.com",
+        "password": "strongandwrongpassword"
+    },
+    "users": [
+        {
+            "name": "User1",
+            "email": "user1@email.com",
+            "password": "strongpassword1"
+        },
+        {
+            "name": "User2",
+            "email": "user2@email.com",
+            "password": "strongpassword2"
+        }
+    ],
+    "tasks": [
+        {
+            "name": "foo",
+            "description": "bar",
+            "date": "2011-11-11"
+        },
+        {
+            "name": "foo2",
+            "description": "bar2",
+            "date": "2011-11-11"
+        }
+    ]
+}

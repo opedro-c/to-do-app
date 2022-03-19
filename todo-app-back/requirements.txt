@@ -13,6 +13,7 @@ Mako==1.1.6
 MarkupSafe==2.1.0
 marshmallow==3.14.1
 marshmallow-sqlalchemy==0.27.0
+PyJWT==1.4.2
 six==1.16.0
 SQLAlchemy==1.4.31
 Werkzeug==2.0.3
