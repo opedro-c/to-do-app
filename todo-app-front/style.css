@@ -7,7 +7,7 @@
     --shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     --color-border: #94a0ac;
     --max-width: 650px;
-    --invert-main-collor: #8f7f6f;
+    --invert-main-collor: rgb(63, 80, 97);
 }
 
 * {
@@ -22,6 +22,15 @@ body {
     padding: 20px;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+a:hover, a:hover #rel {
+    color: var(--second-color);
+}
+
 h1 {
     text-align: center;
     margin-bottom: 0.5em;
@@ -34,19 +43,26 @@ h1 {
 .links {
     text-align: center;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     width: var(--max-width);
+    font-size: 14px;
 }
-.links a {
-    text-decoration: none;
+.btnSwitchMode {
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+#rel {
+    background: transparent;
     color: white;
-    transition: color 0.3s ease;
-}
-.links a:hover {
-    color: var(--second-color);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    width: 55px;
+    text-align: left;
+    transition: 0.5s;
 }
 
 .wrapper {
@@ -54,12 +70,18 @@ h1 {
     width: var(--max-width);
     padding: 28px 0;
     margin: auto;
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.25);
+    transition: 0.5s;
 }
+
+/* screen user */
 .info {
     display: flex;
     flex-direction: column;
+    padding: 0 25px;
 }
 
+/* screen to-do list */
 .task-input {
     height: 52px;
     padding: 0 25px;
@@ -68,7 +90,8 @@ h1 {
 .task-input img {
     position: absolute;
     top: 50%;
-    transform: translate(17px, -50%)
+    transform: translate(17px, -50%);
+    fill: white;
 }
 .task-input input {
     height: 100%;
@@ -100,7 +123,7 @@ h1 {
 .controls .clear-btn {
     outline: none;
     border: none;
-    color: #fff;
+    color: white;
     padding: 7px 13px;
     background: var(--main-color);
     border-radius: 4px;
@@ -122,8 +145,8 @@ h1 {
     margin-left: 0;
 }
 .filters span.active {
-    color: var(--invert-main-collor);
-    border-bottom: 1px solid var(--invert-main-collor);
+    color: var(--second-color);
+    border-bottom: 1px solid var(--second-color);
 }
 
 .task-box {
@@ -194,6 +217,7 @@ h1 {
     padding-right: 8px;
 }
 
+/* general footer */
 footer {
     font-size: 14px;
     text-align: center;
@@ -204,18 +228,31 @@ footer {
     justify-content: space-between;
 }
 footer a {
-    color: inherit;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {
     .wrapper, .links, footer {
-        width: 90%;
+        width: 100%;
     }
+
+    .links {
+        display: grid;
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
     .filters {
         display: flex;
         flex-direction: column;
     }
+    
     .filters span:first-child {
         margin-left: 8px;
+    }
+
+    footer {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 }
