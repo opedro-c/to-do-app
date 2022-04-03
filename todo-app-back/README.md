@@ -1,7 +1,9 @@
 # To-Do API
+
 The To-Do API is built with Flask and is intended to provide an authorization layer with JWT and manage the client tasks in the SQLite3 database.
 
 ## Summary
+
 - User
 	- [Register User](#register-user)
 	- [Get Access Token](#get-access-token)
@@ -20,17 +22,20 @@ HTTP Authorization Scheme | bearer
 Bearer format | JWT
 
 ### Register User
+
   Method |POST
   ----      |  -----
 URL        |  auth/register
 Request schema | application/json
 
 Request body fields:
-- **_required_** name
-- **_required_** email
-- **_required_** password
+
+- **_required_** name: string
+- **_required_** email: string
+- **_required_** password: string
 
 Reponses:
+
 - 201 &#8594; Successfully registered
 - 400 &#8594; Unvalid data provided
 
@@ -45,6 +50,7 @@ Request sample:
 ```
 
 Response sample:
+
 ```json
 {
 	"status": "success",
@@ -52,7 +58,6 @@ Response sample:
 	"auth_token": "786e91a0-1be4-4328-96f7-3539bbbfa9f9"
 }
 ```
-
 
 ### Get Access Token
 
@@ -62,10 +67,12 @@ URL        |  auth/login
 Request schema | application/json
 
 Request body fields:
-- **_required_** email
-- **_required_** password
+
+- **_required_** email: string
+- **_required_** password: string
 
 Reponses:
+
 - 200 &#8594; Success
 - 400 &#8594; Unvalid data provided
 
@@ -79,6 +86,7 @@ Request sample:
 ```
 
 Response sample:
+
 ```json
 {
 	"status": "success",
@@ -87,18 +95,20 @@ Response sample:
 }
 ```
 
-
 ### Get User Status
+
   Method | GET
   ----      |  -----
   Authorization | bearerAuth
 URL        |  auth/status
 
 Reponses:
+
 - 200 &#8594; Success
 - 401 &#8594; Unauthorized
 
 Response sample:
+
 ```json
 {
 	"status": "success",
@@ -113,15 +123,18 @@ Response sample:
 ## Task
 
 ### Get User Tasks
+
   Method | GET
   ----      |  -----
 URL        |  /task
 
 Reponses:
+
 - 200 &#8594; Success
 - 401 &#8594; Unauthorized
 
 Response sample:
+
 ```json
 [
 	{
@@ -142,6 +155,7 @@ Response sample:
 ```
 
 ### Create new task
+
   Method |POST
   ----      |  -----
   Authorization | bearerAuth
@@ -149,12 +163,14 @@ URL        |  /task
 Request schema | application/json
 
 Request body fields:
-- **_required_** name
-- **_required_** date
-- description
-- done
+
+- **_required_** name: string
+- **_required_** date: string (ISO format)
+- description: string
+- done: boolean
 
 Reponses:
+
 - 201 &#8594; Successfully created
 - 400 &#8594; Unvalid data provided
 - 401 &#8594; Unauthorized
@@ -171,9 +187,9 @@ Request sample:
 ```
 
 Response sample:
+
 ```json
 {
-	
 	"name": "Do something important",
 	"description": "That's really important",
 	"done": false,
@@ -182,6 +198,7 @@ Response sample:
 ```
 
 ### Update task
+
   Method |PUT
   ----      |  -----
   Authorization | bearerAuth
@@ -189,12 +206,14 @@ URL        |  /task/{{task_id}}
 Request schema | application/json
 
 Request body fields:
-- name
-- date
-- description
-- done
+
+- name: string
+- date: string (ISO format)
+- description: string
+- done: boolean
 
 Reponses:
+
 - 200 &#8594; Success
 - 400 &#8594; Unvalid data provided
 - 401 &#8594; Unauthorized
@@ -211,9 +230,9 @@ Request sample:
 ```
 
 Response sample:
+
 ```json
 {
-	
 	"name": "Do something important",
 	"description": "That's really important",
 	"done": false,
@@ -222,17 +241,20 @@ Response sample:
 ```
 
 ### Delete task
+
   Method | Delete
   ----      |  -----
   Authorization | bearerAuth
 URL        |  /task/{{task_id}}
 
 Reponses:
+
 - 200 &#8594; Success
 - 400 &#8594; Unvalid data provided
 - 401 &#8594; Unauthorized
 
 Response sample:
+
 ```json
 true
 ```
