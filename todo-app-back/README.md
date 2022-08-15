@@ -125,7 +125,7 @@ Response sample:
 
  | Method | GET   |
 |--------|-------|
-| URL    | users |
+| URL    | /users |
 
 Responses:
 
