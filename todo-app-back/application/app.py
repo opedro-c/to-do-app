@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from model import configure as config_db
 from serializer import configure as configure_ma
 from flask_migrate import Migrate
@@ -7,6 +8,7 @@ from secrets import token_hex
 
 def create_app() -> Flask:
     app: Flask = Flask(__name__)
+    CORS(app)
     app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///todo.db'
     app.config['SECRET_KEY'] = token_hex(16)
     config_db(app)
