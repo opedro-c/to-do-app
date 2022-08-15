@@ -65,3 +65,10 @@ def status():
         return jsonify(response), 200
     response = {'status': 'fail', 'message': 'Provide a valid auth token.'}
     return jsonify(response), 401
+
+
+@bp_user.route('/users', methods=['GET'])
+def get_all_users():
+    us = UserSchema(many=True)
+    query = current_app.db.session.query(User.name, User.email).all()
+    return us.jsonify(query), 200

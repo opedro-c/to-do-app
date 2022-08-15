@@ -135,6 +135,16 @@ class TestAPI(unittest.TestCase):
         response = self.client.delete(f'/task/1', headers=request_headers)
         self.assertEqual(response.status_code, 401, response.json)
 
+    def test_list_all_users(self):
+        response = self.client.get('/users')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json), len(self.config['users']))
+        print(response.json)
+        for i in range(len(self.config['users'])):
+            self.assertEqual(self.config['users'][i]['name'], response.json[i]['name'])
+            self.assertEqual(self.config['users'][i]['email'], response.json[i]['email'])
+            self.assertFalse(response.json[i].get('password'))
+
 
 if __name__ == '__main__':
     unittest.main()
