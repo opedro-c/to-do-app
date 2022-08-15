@@ -8,6 +8,7 @@ The To-Do API is built with Flask and is intended to provide an authorization la
 	- [Register User](#register-user)
 	- [Get Access Token](#get-access-token)
 	- [Get User Status](#get-user-status)
+    - [List all users](#list-all-users)
 - Task
 	- [Get User Tasks](#get-user-tasks)
 	- [Create new task](#create-new-task)
@@ -16,17 +17,17 @@ The To-Do API is built with Flask and is intended to provide an authorization la
 
 ### Authentication
 
-Security Scheme Type |  HTTP
------------- | ------------
-HTTP Authorization Scheme | bearer
-Bearer format | JWT
+| Security Scheme Type      | HTTP   |
+|---------------------------|--------|
+| HTTP Authorization Scheme | bearer |
+ | Bearer format             | JWT    |
 
 ### Register User
 
-  Method |POST
-  ----      |  -----
-URL        |  auth/register
-Request schema | application/json
+|  Method        | POST             |
+|----------------|------------------|
+ | URL            | auth/register    |
+| Request schema | application/json |
 
 Request body fields:
 
@@ -34,10 +35,10 @@ Request body fields:
 - **_required_** email: string
 - **_required_** password: string
 
-Reponses:
+Responses:
 
 - 201 &#8594; Successfully registered
-- 400 &#8594; Unvalid data provided
+- 400 &#8594; Invalid data provided
 
 Request sample:
 
@@ -61,20 +62,20 @@ Response sample:
 
 ### Get Access Token
 
-  Method |POST
-  ----      |  -----
-URL        |  auth/login
-Request schema | application/json
+| Method         | POST             |
+|----------------|------------------|
+| URL            | auth/login       |
+| Request schema | application/json |
 
 Request body fields:
 
 - **_required_** email: string
 - **_required_** password: string
 
-Reponses:
+Responses:
 
 - 200 &#8594; Success
-- 400 &#8594; Unvalid data provided
+- 400 &#8594; Invalid data provided
 
 Request sample:
 
@@ -97,12 +98,12 @@ Response sample:
 
 ### Get User Status
 
-  Method | GET
-  ----      |  -----
-  Authorization | bearerAuth
-URL        |  auth/status
+| Method        | GET         |
+|---------------|-------------|
+| Authorization | bearerAuth  |
+ | URL           | auth/status |
 
-Reponses:
+Responses:
 
 - 200 &#8594; Success
 - 401 &#8594; Unauthorized
@@ -120,15 +121,40 @@ Response sample:
 }
 ```
 
+### List All Users
+
+ | Method | GET   |
+|--------|-------|
+| URL    | users |
+
+Responses:
+
+- 200 &#8594; Success
+
+Response sample:
+
+```json
+[
+	{
+		"name": "User1",
+		"email": "user1@email.com"
+	},
+	{
+		"name": "User2",
+		"email": "user2@email.com"
+	}
+]
+```
+
 ## Task
 
 ### Get User Tasks
 
-  Method | GET
-  ----      |  -----
-URL        |  /task
+| Method | GET   |
+|--------|-------|
+|  URL   | /task |
 
-Reponses:
+Responses:
 
 - 200 &#8594; Success
 - 401 &#8594; Unauthorized
@@ -138,29 +164,29 @@ Response sample:
 ```json
 [
 	{
-		"id": 456
+		"id": 456,
 		"name": "Do something important",
 		"description": "That's really important",
 		"done": false,
 		"date": "2011-11-11"
 	},
 	{
-		"id": 123
+		"id": 123,
 		"name": "Wash dishes",
 		"description": "That's really boring",
 		"done": true,
 		"date": "2011-11-10"
-	}, 
+	}
 ]
 ```
 
 ### Create new task
 
-  Method |POST
-  ----      |  -----
-  Authorization | bearerAuth
-URL        |  /task
-Request schema | application/json
+| Method          | POST             |
+|-----------------|------------------|
+| Authorization   | bearerAuth       |
+ | URL             | /task            |
+|  Request schema | application/json |
 
 Request body fields:
 
@@ -169,10 +195,10 @@ Request body fields:
 - description: string
 - done: boolean
 
-Reponses:
+Responses:
 
 - 201 &#8594; Successfully created
-- 400 &#8594; Unvalid data provided
+- 400 &#8594; Invalid data provided
 - 401 &#8594; Unauthorized
 
 Request sample:
@@ -199,11 +225,11 @@ Response sample:
 
 ### Update task
 
-  Method |PUT
-  ----      |  -----
-  Authorization | bearerAuth
-URL        |  /task/{{task_id}}
-Request schema | application/json
+| Method          | PUT               |
+|-----------------|-------------------|
+| Authorization   | bearerAuth        |
+| URL             | /task/{{task_id}} |
+|  Request schema | application/json  |
 
 Request body fields:
 
@@ -212,10 +238,10 @@ Request body fields:
 - description: string
 - done: boolean
 
-Reponses:
+Responses:
 
 - 200 &#8594; Success
-- 400 &#8594; Unvalid data provided
+- 400 &#8594; Invalid data provided
 - 401 &#8594; Unauthorized
 
 Request sample:
@@ -242,15 +268,15 @@ Response sample:
 
 ### Delete task
 
-  Method | Delete
-  ----      |  -----
-  Authorization | bearerAuth
-URL        |  /task/{{task_id}}
+| Method        | Delete            |
+|---------------|-------------------|
+| Authorization | bearerAuth        |
+ | URL           | /task/{{task_id}} |
 
-Reponses:
+Responses:
 
 - 200 &#8594; Success
-- 400 &#8594; Unvalid data provided
+- 400 &#8594; Invalid data provided
 - 401 &#8594; Unauthorized
 
 Response sample:
