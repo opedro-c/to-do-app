@@ -52,8 +52,7 @@ def login():
 
 @bp_user.route('/auth/status', methods=['GET'])
 def status():
-    auth_token = User.get_auth_token(request)
-    user = User.get_user_status(auth_token)
+    user = User.get_user_status(request)
     if user:
         response = {
             'status': 'success',
